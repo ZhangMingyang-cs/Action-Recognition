@@ -264,8 +264,8 @@ class NTUDataLoaders(object):
         f = h5py.File(path, 'r')
         self.train_X = f['x'][:]
         self.train_Y = np.argmax(f['y'][:], -1)
-        self.val_X = f['test_x'][:]
-        self.val_Y = np.argmax(f['test_y'][:], -1)
+        self.val_X = f['valid_x'][:]
+        self.val_Y = np.argmax(f['valid_y'][:], -1)
         self.test_X = f['test_x'][:]
         self.test_Y = np.argmax(f['test_y'][:], -1)
 
