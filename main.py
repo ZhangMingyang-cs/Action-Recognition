@@ -22,7 +22,7 @@ args.add_argument('--model', type=str, default='resnet',
                   help='the neural network to use')
 args.add_argument('--dataset', type=str, default='NTU',
                   help='select dataset to evlulate')
-args.add_argument('--max_epoches', type=int, default=100,
+args.add_argument('--max_epoches', type=int, default=1,
                   help='start number of epochs to run')
 args.add_argument('--lr', type=float, default=0.0001,
                   help='initial learning rate')
@@ -161,7 +161,7 @@ def main(results):
 
     # Testing
     test_loader = ntu_loaders.get_test_loader(args.batch_size, args.workers)
-    test(test_loader, model, checkpoint, results, pred_dir, label_dir, trans_dir)
+    test(test_loader, model, checkpoint, results, pred_dir, label_dir)
 
 
 def train(train_loader, model, criterion, optimizer, epoch, reg_loss=None):
@@ -222,7 +222,7 @@ def validate(val_loader, model, criterion, reg_loss=None):
     return losses.avg, acces.avg
 
 
-def test(test_loader, model, checkpoint, results, path, label_path, trans_path):
+def test(test_loader, model, checkpoint, results, path, label_path):
     acces = AverageMeter()
     # load learnt model that obtained best performance on validation set
     model.load_state_dict(torch.load(checkpoint)['state_dict'], strict=False)
