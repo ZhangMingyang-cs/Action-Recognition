@@ -64,7 +64,7 @@ def main(results):
     criterion = nn.CrossEntropyLoss().cuda()
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
     if args.weight_decay > 0:
-        reg_loss = Regularization(model, weight_decay, p=2).to('cuda')
+        reg_loss = Regularization(model, args.weight_decay, p=2).to('cuda')
     else:
         reg_loss = None
 
